@@ -36,6 +36,10 @@ int SNTP_SetServerName(const char* serverName)
 int SNTP_Init()
 {
 	LogInfo("Initializing SNTP");
+
+	if ( sntp_enabled() ) {
+		sntp_stop();
+	}
 	sntp_setoperatingmode(SNTP_OPMODE_POLL);
 	sntp_init();
 	time_t ts = 0;
